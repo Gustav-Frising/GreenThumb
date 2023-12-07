@@ -34,11 +34,7 @@ namespace GreenThumb.Database
                 _dbSet.Remove(entityToDelete);
             }
         }
-        public async Task Complete()
-        {
-            await _context.SaveChangesAsync();
 
-        }
     }
 
 }
