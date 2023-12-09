@@ -6,11 +6,11 @@ namespace GreenThumb.Models
     {
         [Key]
         public int GardenId { get; set; }
-        public string location { get; set; } = null!;
+        public string Location { get; set; } = null!;
         public bool Hasgreenhouse { get; set; }
         public int UserId { get; set; }
         public UserModel? User { get; set; }
-        public List<PlantGardenModel> PlandGardens { get; set; } = new();
+        public List<PlantGardenModel> PlantGardens { get; set; } = new();
     }
 
 }

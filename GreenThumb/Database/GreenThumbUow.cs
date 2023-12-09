@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using GreenThumb.Managers;
 using GreenThumb.Models;
 
 namespace GreenThumb.Database
@@ -10,9 +11,9 @@ namespace GreenThumb.Database
 
         public GreenThumbRepository<GardenModel> GardenRepository { get; }
         public GreenThumbRepository<InstructionModel> InstructionRepository { get; }
-        public GreenThumbRepository<PlantModel> PlantRepository { get; set; }
-        public GreenThumbRepository<UserModel> UserRepository { get; set; }
-        public GreenThumbRepository<PlantGardenModel> PlantGardenRepository { get; set; }
+        public GreenThumbRepository<PlantModel> PlantRepository { get; }
+        public GreenThumbRepository<UserModel> UserRepository { get; }
+        public GreenThumbRepository<PlantGardenModel> PlantGardenRepository { get; }
 
         public GreenThumbUow(GreenThumbDbContext context)
         {
@@ -21,8 +22,9 @@ namespace GreenThumb.Database
             InstructionRepository = new(context);
             PlantRepository = new(context);
             UserRepository = new(context);
+            PlantGardenRepository = new(context);
         }
-        public static UserModel? SignedInUser { get; set; }
+
         public async Task Complete()
         {
             await _context.SaveChangesAsync();
@@ -89,7 +91,7 @@ namespace GreenThumb.Database
                     if (user.Username == username && user.password == password)
                     {
                         //user was found
-                        SignedInUser = user;
+                        Usermanager.SignedInUser = user;
 
                         return true;
                     }
@@ -99,7 +101,7 @@ namespace GreenThumb.Database
         }
         public void SignOutUser()
         {
-            SignedInUser = null;
+            Usermanager.SignedInUser = null;
         }
 
     }

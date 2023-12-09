@@ -81,7 +81,7 @@
     Content="Add to garden"
     Grid.Column="2" 
     Grid.Row="4"
-    Padding="15"
+    Padding="15" Click="btnAddToGarden_Click"
     />
         <Button
     Name="btnGarden"

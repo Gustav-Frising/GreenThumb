@@ -48,7 +48,6 @@
         
         <Button
      Name="btnAddFlower"
-     Margin="1 1"
      HorizontalAlignment="Right"
      VerticalAlignment="Bottom"
      Content="Add flower"
@@ -56,7 +55,25 @@
      Grid.Row="1"
      Padding="10" Click="btnAddFlower_Click" 
      />
-            <Button
+        <Button
+Name="btnAddGarden"
+HorizontalAlignment="Center"
+VerticalAlignment="Bottom"
+Content="Add garden"
+Grid.Column="2" 
+Grid.Row="1"
+Padding="10" Click="btnAddGarden_Click" 
+/>
+        <Button
+    Name="btnMyGarden"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Bottom"
+    Content="My garden"
+    Grid.Column="1" 
+    Grid.Row="1"
+    Padding="10" Click="btnMyGarden_Click"
+    />  
+        <Button
      HorizontalAlignment="Left"
      VerticalAlignment="Bottom"
      Content="Details"
@@ -65,15 +82,15 @@
      Padding="10" Click="Button_Click" 
      />
             <Button
-     HorizontalAlignment="Right"
+     HorizontalAlignment="Left"
      VerticalAlignment="Bottom"
      Content="Remove"
-     Grid.Column="1" 
+     Grid.Column="2" 
      Grid.Row="3"
      Padding="10" Click="Button_Click_1" 
      />
         <Button
-     Margin="15 0"
+     
      HorizontalAlignment="Right"
      VerticalAlignment="Bottom"
      Content="Sign out"

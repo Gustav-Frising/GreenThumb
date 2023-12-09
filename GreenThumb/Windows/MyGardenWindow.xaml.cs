@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using GreenThumb.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumb.Windows
 {
@@ -19,9 +10,40 @@ namespace GreenThumb.Windows
     /// </summary>
     public partial class MyGardenWindow : Window
     {
-        public MyGardenWindow()
+        public MyGardenWindow(int id)
         {
             InitializeComponent();
+
+
+
+            using (GreenThumbDbContext context = new GreenThumbDbContext())
+            {
+                GreenThumbUow uow = new GreenThumbUow(context);
+
+
+                var selectedPlants = context.PlantGardens
+                    .Include(pg => pg.Plant)
+                    .Where(p => p.GardenId == id)
+                    .ToList();
+
+                lstGardenPlants.Items.Clear();
+                foreach (var plant in selectedPlants)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Tag = plant;
+                    item.Content = plant.Plant.Name;
+                    lstGardenPlants.Items.Add(item);
+                }
+
+
+            }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            PlantWindow PlantWindow = new();
+            PlantWindow.Show();
+            Close();
         }
     }
 }

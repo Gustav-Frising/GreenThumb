@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using GreenThumb.Database;
+using GreenThumb.Managers;
 using GreenThumb.Models;
 
 namespace GreenThumb.Windows
@@ -111,5 +112,41 @@ namespace GreenThumb.Windows
                 Close();
             }
         }
+
+        private async void btnMyGarden_Click(object sender, RoutedEventArgs e)
+        {
+            using (GreenThumbDbContext context = new GreenThumbDbContext())
+            {
+                GreenThumbUow uow = new(context);
+                var gardens = await uow.GardenRepository.GetAll();
+
+                foreach (var garden in gardens)
+                {
+                    MessageBox.Show($"Checking garden: {garden.GardenId}, User: {garden.UserId}");
+
+                    if (garden.UserId == Usermanager.SignedInUser.UserId)
+                    {
+                        MessageBox.Show($"User's garden found: {garden.GardenId}");
+                        Usermanager.CurrentGarden = garden;
+                        break;
+                    }
+                }
+                MyGardenWindow gardenWindow = new(Usermanager.CurrentGarden.GardenId);
+
+                gardenWindow.Show();
+
+                Close();
+            }
+        }
+
+        private void btnAddGarden_Click(object sender, RoutedEventArgs e)
+        {
+            AddGardenwindow addGadenWindow = new();
+
+            addGadenWindow.Show();
+
+            Close();
+        }
     }
 }
+

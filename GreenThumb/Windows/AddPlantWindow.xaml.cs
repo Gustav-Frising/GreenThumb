@@ -34,30 +34,45 @@ namespace GreenThumb.Windows
                     };
 
                     instructions.Add(newinstruction);
+                }
+                PlantModel newPlant = new()
+                {
+                    Name = name.ToLower(),
+                    Description = details,
+                    PlantedDate = date,
+                    Instructions = instructions
 
-                    PlantModel newPlant = new()
-                    {
-                        Name = name,
-                        Description = details,
-                        PlantedDate = date,
-                        Instructions = instructions
+                };
+                GreenThumbUow uow = new(context);
+                var flowers = await uow.PlantRepository.GetAll();
+                var flowerExists = context.Plants.Any(p => p.Name.ToLower() == name.ToLower());
 
-                    };
-                    GreenThumbUow uow = new(context);
+                if (!flowerExists)
+                {
                     await uow.PlantRepository.Add(newPlant);
                     await uow.Complete();
 
+                    PlantWindow PlantWindow = new();
+                    PlantWindow.Show();
+                    Close();
                 }
+                else
+                {
+                    MessageBox.Show("plant already exist");
+                    txtisntructions.Text = "";
+                    txtPlant.Text = "";
+                    txtPlantDetails.Text = "";
+                }
+
             }
-            PlantWindow PlantWindow = new();
-            PlantWindow.Show();
-            Close();
+
 
         }
 
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            //fixa exeption
             ListViewItem selectedItem = (ListViewItem)lstDescriptions.SelectedItem;
             if (selectedItem != null)
             {
