@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenThumb.Migrations
 {
     [DbContext(typeof(GreenThumbDbContext))]
-    [Migration("20231209233109_initialcreate")]
-    partial class initialcreate
+    [Migration("20231210195807_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,6 @@ namespace GreenThumb.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GardenId"), 1L, 1);
-
-                    b.Property<bool>("Hasgreenhouse")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -165,35 +162,28 @@ namespace GreenThumb.Migrations
                             PlantId = 1,
                             Description = "The flower reaches on average 20–90 centimetres,They are hermaphroditic and scentless,",
                             Name = "Fire lilly",
-                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(5958)
+                            PlantedDate = new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3048)
                         },
                         new
                         {
                             PlantId = 2,
                             Description = "It has thick stems up to 2 cm in diameter, which it uses to crawl up tall trees to reach sunlight,the flowers hang like clusters of grapes ",
                             Name = "Jade vine",
-                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6013)
+                            PlantedDate = new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3117)
                         },
                         new
                         {
                             PlantId = 3,
                             Description = "Magnolias are spreading evergreen,haracterised by large fragrant flowers, which may be bowl-shaped or star-shaped",
                             Name = "Magnolia",
-                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6016)
+                            PlantedDate = new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3120)
                         },
                         new
                         {
                             PlantId = 4,
                             Description = "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face",
                             Name = "Monkey face orchid",
-                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6018)
-                        },
-                        new
-                        {
-                            PlantId = 5,
-                            Description = "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo",
-                            Name = "Parrot flower",
-                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6021)
+                            PlantedDate = new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3123)
                         });
                 });
 
@@ -221,8 +211,8 @@ namespace GreenThumb.Migrations
                         new
                         {
                             UserId = 1,
-                            Username = "bob",
-                            password = "6bWI3ld0ZVUHFgELtSFvOA=="
+                            Username = "user",
+                            password = "BETzSRAPc3/w6srQ6jx5bw=="
                         });
                 });
 

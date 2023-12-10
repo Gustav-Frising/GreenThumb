@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using GreenThumb.Database;
+using GreenThumb.Managers;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumb.Windows
@@ -14,7 +15,8 @@ namespace GreenThumb.Windows
         {
             InitializeComponent();
 
-
+            txtlocation.Text = GardenManager.CurrentGarden.Location;
+            txtGarden.Text = ($"{Usermanager.SignedInUser.Username}'s Garden");
 
             using (GreenThumbDbContext context = new GreenThumbDbContext())
             {

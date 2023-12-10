@@ -82,8 +82,13 @@ namespace GreenThumb.Windows
                 }
                 await UpdateUi();
             }
+            else
+            {
+                MessageBox.Show("you must select a plant to delete");
+            }
         }
 
+        //search function
         private void txtPlant_TextChanged(object sender, TextChangedEventArgs e)
         {
             using (GreenThumbDbContext context = new GreenThumbDbContext())
@@ -121,7 +126,7 @@ namespace GreenThumb.Windows
 
         private async void btnMyGarden_Click(object sender, RoutedEventArgs e)
         {
-
+            //check if there is any flowers in the garden
             if (GardenManager.CurrentGarden != null)
             {
                 MyGardenWindow gardenWindow = new(GardenManager.CurrentGarden.GardenId);

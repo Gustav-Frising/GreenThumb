@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenThumb.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,7 +65,6 @@ namespace GreenThumb.Migrations
                     GardenId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hasgreenhouse = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -108,17 +107,16 @@ namespace GreenThumb.Migrations
                 columns: new[] { "PlantId", "Description", "Name", "PlantedDate" },
                 values: new object[,]
                 {
-                    { 1, "The flower reaches on average 20–90 centimetres,They are hermaphroditic and scentless,", "Fire lilly", new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(5958) },
-                    { 2, "It has thick stems up to 2 cm in diameter, which it uses to crawl up tall trees to reach sunlight,the flowers hang like clusters of grapes ", "Jade vine", new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6013) },
-                    { 3, "Magnolias are spreading evergreen,haracterised by large fragrant flowers, which may be bowl-shaped or star-shaped", "Magnolia", new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6016) },
-                    { 4, "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face", "Monkey face orchid", new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6018) },
-                    { 5, "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo", "Parrot flower", new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6021) }
+                    { 1, "The flower reaches on average 20–90 centimetres,They are hermaphroditic and scentless,", "Fire lilly", new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3048) },
+                    { 2, "It has thick stems up to 2 cm in diameter, which it uses to crawl up tall trees to reach sunlight,the flowers hang like clusters of grapes ", "Jade vine", new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3117) },
+                    { 3, "Magnolias are spreading evergreen,haracterised by large fragrant flowers, which may be bowl-shaped or star-shaped", "Magnolia", new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3120) },
+                    { 4, "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face", "Monkey face orchid", new DateTime(2023, 12, 10, 20, 58, 7, 251, DateTimeKind.Local).AddTicks(3123) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Username", "password" },
-                values: new object[] { 1, "bob", "6bWI3ld0ZVUHFgELtSFvOA==" });
+                values: new object[] { 1, "user", "BETzSRAPc3/w6srQ6jx5bw==" });
 
             migrationBuilder.InsertData(
                 table: "Instructions",

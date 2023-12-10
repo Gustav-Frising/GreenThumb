@@ -58,6 +58,7 @@ namespace GreenThumb.Windows
             {
                 GreenThumbUow uow = new GreenThumbUow(context);
 
+
                 var plantGardens = await uow.PlantGardenRepository.GetAll();
 
                 var gardens = await uow.GardenRepository.GetAll();
@@ -66,10 +67,13 @@ namespace GreenThumb.Windows
 
                 GardenManager.CurrentGarden = userGarden;
 
+
+                //check if user has a garden
+
                 if (userGarden != null)
                 {
 
-
+                    //check if user already has This plant
                     if (!userGarden.PlantGardens.Any(pg => pg.PlantId == _plantId))
                     {
                         PlantGardenModel plantgarden = new PlantGardenModel

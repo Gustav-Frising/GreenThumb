@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumb.Windows"
         mc:Ignorable="d"
-        Title="MyGardenWindow" Height="450" Width="500">
+        Title="MyGardenWindow" Height="450" Width="500" Background="ForestGreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -30,6 +30,28 @@
           Content="Back"
           Grid.Row="4"
           Grid.Column="1" Click="btnBack_Click"  />
+        <TextBox           
+          Name="txtGarden"
+            BorderBrush="Transparent"
+          FontSize="15"         
+          Grid.Row="1"  
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          HorizontalContentAlignment="Left"
+          Background="Transparent"
+          IsReadOnly="True"
+          />
+        <TextBox           
+          Name="txtlocation"
+          BorderBrush="Transparent"
+          FontSize="15"         
+          Grid.Row="1"  
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          HorizontalContentAlignment="Right"
+          Background="Transparent"
+          IsReadOnly="True"
+          />
         <Label
              VerticalAlignment="Center"
              HorizontalAlignment="Center"

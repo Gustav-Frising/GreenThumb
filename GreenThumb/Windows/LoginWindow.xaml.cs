@@ -26,6 +26,7 @@ namespace GreenThumb.Windows
         {
             using (GreenThumbDbContext context = new GreenThumbDbContext())
             {
+                GreenThumbUow uow = new(context);
                 string username = txtUsername.Text;
                 string password = txtPassword.Text;
 
@@ -33,8 +34,14 @@ namespace GreenThumb.Windows
 
                 bool isSuccessfulSignIn = await Usermanager.SignInUser(username, password);
 
+
                 if (isSuccessfulSignIn)
                 {
+                    // if user is found asign currentgarden to signedInUser
+                    var gardens = await uow.GardenRepository.GetAll();
+                    var userGarden = gardens.FirstOrDefault(g => g.UserId == Usermanager.SignedInUser.UserId);
+
+                    GardenManager.CurrentGarden = userGarden;
                     PlantWindow plantWindow = new();
                     plantWindow.Show();
                     Close();

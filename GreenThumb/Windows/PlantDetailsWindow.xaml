@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumb.Windows"
         mc:Ignorable="d"
-        Title="PlantDetailsWindow" Height="450" Width="800">
+        Title="PlantDetailsWindow" Height="450" Width="800" Background="ForestGreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -40,6 +40,7 @@
     Margin="0 20"
     Grid.Row="2"
     Grid.Column="1"
+     
     />
         <TextBox
     Name="txtPlant"
@@ -47,6 +48,7 @@
     VerticalAlignment="Bottom"             
     Grid.Row="2"
     Grid.Column="1"
+    IsReadOnly="True"
      />
 
         <Label
@@ -61,6 +63,7 @@
     Margin="0 35 30 0"           
     Grid.Row="3"
     Grid.Column="1"
+    Grid.RowSpan="2"
     IsReadOnly="True"
     TextWrapping="Wrap"  
     />

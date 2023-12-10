@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumb.Windows"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="450">
+        Title="RegistrationWindow" Height="450" Width="450" Background="ForestGreen">
     <Grid>
     <Grid.RowDefinitions>
         <RowDefinition Height="20"/>

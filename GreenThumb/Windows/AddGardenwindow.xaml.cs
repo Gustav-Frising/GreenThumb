@@ -22,11 +22,10 @@ namespace GreenThumb.Windows
             Close();
         }
 
+        //add garden to user
         private async void btnaddGarden_Click(object sender, RoutedEventArgs e)
         {
             string location = txtGardenLocation.Text;
-            bool hasGreenhouse = ((bool)cbGreenhouse.IsChecked);
-
 
             using (GreenThumbDbContext context = new())
             {
@@ -37,7 +36,6 @@ namespace GreenThumb.Windows
                 GardenModel newGarden = new()
                 {
                     Location = location,
-                    Hasgreenhouse = hasGreenhouse,
                     UserId = user.UserId
                 };
                 await uow.GardenRepository.Add(newGarden);

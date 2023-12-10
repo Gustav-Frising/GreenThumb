@@ -69,15 +69,8 @@ namespace GreenThumb.Database
                     Description = "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face",
                     PlantedDate = DateTime.Now,
 
-                },
-            new PlantModel()
-            {
-                PlantId = 5,
-                Name = "Parrot flower",
-                Description = "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo",
-                PlantedDate = DateTime.Now,
+                });
 
-            });
             modelBuilder.Entity<InstructionModel>()
                 .HasData(new InstructionModel()
                 {
@@ -132,8 +125,8 @@ namespace GreenThumb.Database
                .HasData(new UserModel()
                {
                    UserId = 1,
-                   Username = "bob",
-                   password = "Ross"
+                   Username = "user",
+                   password = "password"
                });
 
         }
