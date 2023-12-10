@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using GreenThumb.Database;
+using GreenThumb.Managers;
 
 namespace GreenThumb.Windows
 {
@@ -28,9 +29,9 @@ namespace GreenThumb.Windows
                 string username = txtUsername.Text;
                 string password = txtPassword.Text;
 
-                GreenThumbUow uow = new GreenThumbUow(context);
 
-                bool isSuccessfulSignIn = await uow.SignInUser(username, password);
+
+                bool isSuccessfulSignIn = await Usermanager.SignInUser(username, password);
 
                 if (isSuccessfulSignIn)
                 {

@@ -33,12 +33,12 @@ namespace GreenThumb.Migrations
                     b.Property<bool>("Hasgreenhouse")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("location")
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("GardenId");
 
@@ -161,30 +161,37 @@ namespace GreenThumb.Migrations
                         new
                         {
                             PlantId = 1,
-                            Description = "The floweer xreaches on average 20–90 centimetres,They are hermaphroditic and scentless,",
+                            Description = "The flower reaches on average 20–90 centimetres,They are hermaphroditic and scentless,",
                             Name = "Fire lilly",
-                            PlantedDate = new DateTime(2023, 12, 5, 11, 26, 45, 373, DateTimeKind.Local).AddTicks(3833)
+                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(5958)
                         },
                         new
                         {
                             PlantId = 2,
                             Description = "It has thick stems up to 2 cm in diameter, which it uses to crawl up tall trees to reach sunlight,the flowers hang like clusters of grapes ",
                             Name = "Jade vine",
-                            PlantedDate = new DateTime(2023, 12, 5, 11, 26, 45, 373, DateTimeKind.Local).AddTicks(3881)
+                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6013)
                         },
                         new
                         {
                             PlantId = 3,
                             Description = "Magnolias are spreading evergreen,haracterised by large fragrant flowers, which may be bowl-shaped or star-shaped",
                             Name = "Magnolia",
-                            PlantedDate = new DateTime(2023, 12, 5, 11, 26, 45, 373, DateTimeKind.Local).AddTicks(3883)
+                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6016)
                         },
                         new
                         {
                             PlantId = 4,
                             Description = "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face",
                             Name = "Monkey face orchid",
-                            PlantedDate = new DateTime(2023, 12, 5, 11, 26, 45, 373, DateTimeKind.Local).AddTicks(3885)
+                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6018)
+                        },
+                        new
+                        {
+                            PlantId = 5,
+                            Description = "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo",
+                            Name = "Parrot flower",
+                            PlantedDate = new DateTime(2023, 12, 10, 0, 31, 9, 535, DateTimeKind.Local).AddTicks(6021)
                         });
                 });
 
@@ -207,6 +214,14 @@ namespace GreenThumb.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Username = "bob",
+                            password = "6bWI3ld0ZVUHFgELtSFvOA=="
+                        });
                 });
 
             modelBuilder.Entity("GreenThumb.Models.GardenModel", b =>
@@ -234,7 +249,7 @@ namespace GreenThumb.Migrations
             modelBuilder.Entity("GreenThumb.Models.PlantGardenModel", b =>
                 {
                     b.HasOne("GreenThumb.Models.GardenModel", "Garden")
-                        .WithMany("PlandGardens")
+                        .WithMany("PlantGardens")
                         .HasForeignKey("GardenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -252,7 +267,7 @@ namespace GreenThumb.Migrations
 
             modelBuilder.Entity("GreenThumb.Models.GardenModel", b =>
                 {
-                    b.Navigation("PlandGardens");
+                    b.Navigation("PlantGardens");
                 });
 
             modelBuilder.Entity("GreenThumb.Models.PlantModel", b =>

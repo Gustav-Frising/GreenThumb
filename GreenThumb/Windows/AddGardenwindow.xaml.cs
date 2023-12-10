@@ -40,8 +40,6 @@ namespace GreenThumb.Windows
                     Hasgreenhouse = hasGreenhouse,
                     UserId = user.UserId
                 };
-
-                Usermanager.SignedInUser.Garden = newGarden;
                 await uow.GardenRepository.Add(newGarden);
                 await uow.Complete();
             }

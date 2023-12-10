@@ -54,66 +54,52 @@ namespace GreenThumb.Windows
         {
 
 
-
             using (GreenThumbDbContext context = new GreenThumbDbContext())
             {
                 GreenThumbUow uow = new GreenThumbUow(context);
 
+                var plantGardens = await uow.PlantGardenRepository.GetAll();
+
                 var gardens = await uow.GardenRepository.GetAll();
 
-                foreach (var garden in gardens)
+                var userGarden = gardens.FirstOrDefault(g => g.UserId == Usermanager.SignedInUser.UserId);
+
+                GardenManager.CurrentGarden = userGarden;
+
+                if (userGarden != null)
                 {
 
 
-                    if (garden.UserId == Usermanager.SignedInUser.UserId)
+                    if (!userGarden.PlantGardens.Any(pg => pg.PlantId == _plantId))
                     {
+                        PlantGardenModel plantgarden = new PlantGardenModel
+                        {
+                            PlantId = _plantId,
+                            GardenId = userGarden.GardenId,
+                        };
 
-                        Usermanager.CurrentGarden = garden;
-                        break;
+                        await uow.PlantGardenRepository.Add(plantgarden);
+                        await uow.Complete();
+
+                        PlantWindow PlantWindow = new();
+                        PlantWindow.Show();
+                        Close();
                     }
-                }
-
-                if (Usermanager.CurrentGarden != null)
-                {
-                    PlantGardenModel plantgarden = new()
+                    else
                     {
-                        PlantId = _plantId,
-                        GardenId = Usermanager.CurrentGarden.GardenId,
-                    };
-
-                    await uow.PlantGardenRepository.Add(plantgarden);
-                    await uow.Complete();
-
+                        MessageBox.Show($"you already have that plant in your garden");
+                    }
                 }
                 else
                 {
                     MessageBox.Show("User doesn't have a matching garden.");
+                    AddGardenwindow addGadenWindow = new();
+
+                    addGadenWindow.Show();
+
+                    Close();
                 }
             }
-
-
-
-            //using (GreenThumbDbContext context = new GreenThumbDbContext())
-            //{
-            //    GreenThumbUow uow = new GreenThumbUow(context);
-
-            //    var gardens = await uow.GardenRepository.GetAll();
-
-            //    var userGarden = gardens.FirstOrDefault(g => g.UserId == Usermanager.SignedInUser.UserId);
-
-            //    if (userGarden != null)
-            //    {
-            //        PlantGardenModel plantgarden = new PlantGardenModel
-            //        {
-            //            PlantId = _plantId,
-            //            GardenId = userGarden.GardenId,
-            //        };
-
-            //        await uow.PlantGardenRepository.Add(plantgarden);
-            //        await uow.Complete();
-            //    }
-
-            //}
 
 
         }

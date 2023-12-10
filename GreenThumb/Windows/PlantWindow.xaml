@@ -55,15 +55,7 @@
      Grid.Row="1"
      Padding="10" Click="btnAddFlower_Click" 
      />
-        <Button
-Name="btnAddGarden"
-HorizontalAlignment="Center"
-VerticalAlignment="Bottom"
-Content="Add garden"
-Grid.Column="2" 
-Grid.Row="1"
-Padding="10" Click="btnAddGarden_Click" 
-/>
+        
         <Button
     Name="btnMyGarden"
     HorizontalAlignment="Left"
@@ -71,7 +63,8 @@ Padding="10" Click="btnAddGarden_Click"
     Content="My garden"
     Grid.Column="1" 
     Grid.Row="1"
-    Padding="10" Click="btnMyGarden_Click"
+    Padding="10" 
+    Click="btnMyGarden_Click"
     />  
         <Button
      HorizontalAlignment="Left"

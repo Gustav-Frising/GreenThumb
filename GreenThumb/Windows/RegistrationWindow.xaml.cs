@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using GreenThumb.Database;
+using GreenThumb.Managers;
 using GreenThumb.Models;
 
 namespace GreenThumb.Windows
@@ -25,7 +26,6 @@ namespace GreenThumb.Windows
         {
             using (GreenThumbDbContext context = new GreenThumbDbContext())
             {
-                GreenThumbUow uow = new GreenThumbUow(context);
 
                 UserModel newUser = new();
                 {
@@ -34,7 +34,7 @@ namespace GreenThumb.Windows
 
                 }
 
-                bool isUserAdded = await uow.AddUser(newUser);
+                bool isUserAdded = await Usermanager.AddUser(newUser);
                 if (isUserAdded)
                 {
                     MessageBox.Show("user has been added sucessfully");

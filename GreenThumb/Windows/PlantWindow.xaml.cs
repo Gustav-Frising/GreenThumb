@@ -47,14 +47,21 @@ namespace GreenThumb.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             ListViewItem selectedItem = (ListViewItem)lstFlowers.SelectedItem;
+            if (selectedItem != null)
+            {
+                PlantModel selectedPlant = (PlantModel)selectedItem.Tag;
 
-            PlantModel selectedPlant = (PlantModel)selectedItem.Tag;
 
-
-            PlantDetailsWindow plantDetailsWindow = new(selectedPlant.PlantId);
-            plantDetailsWindow.Show();
-            Close();
+                PlantDetailsWindow plantDetailsWindow = new(selectedPlant.PlantId);
+                plantDetailsWindow.Show();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("you must select a plant to view the details off");
+            }
         }
 
 
@@ -102,8 +109,7 @@ namespace GreenThumb.Windows
         {
             using (GreenThumbDbContext context = new GreenThumbDbContext())
             {
-                GreenThumbUow uow = new GreenThumbUow(context);
-                uow.SignOutUser();
+                Usermanager.SignOutUser();
 
 
                 LoginWindow loginWindow = new();
@@ -115,28 +121,21 @@ namespace GreenThumb.Windows
 
         private async void btnMyGarden_Click(object sender, RoutedEventArgs e)
         {
-            using (GreenThumbDbContext context = new GreenThumbDbContext())
+
+            if (GardenManager.CurrentGarden != null)
             {
-                GreenThumbUow uow = new(context);
-                var gardens = await uow.GardenRepository.GetAll();
-
-                foreach (var garden in gardens)
-                {
-                    MessageBox.Show($"Checking garden: {garden.GardenId}, User: {garden.UserId}");
-
-                    if (garden.UserId == Usermanager.SignedInUser.UserId)
-                    {
-                        MessageBox.Show($"User's garden found: {garden.GardenId}");
-                        Usermanager.CurrentGarden = garden;
-                        break;
-                    }
-                }
-                MyGardenWindow gardenWindow = new(Usermanager.CurrentGarden.GardenId);
+                MyGardenWindow gardenWindow = new(GardenManager.CurrentGarden.GardenId);
 
                 gardenWindow.Show();
 
                 Close();
             }
+
+            else
+            {
+                MessageBox.Show("there are no plant in your garden");
+            }
+
         }
 
         private void btnAddGarden_Click(object sender, RoutedEventArgs e)

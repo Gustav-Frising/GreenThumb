@@ -1,13 +1,18 @@
-﻿using GreenThumb.Models;
+﻿using EntityFrameworkCore.EncryptColumn.Extension;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using GreenThumb.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumb.Database
 {
+
     internal class GreenThumbDbContext : DbContext
     {
+        private readonly IEncryptionProvider _provider;
         public GreenThumbDbContext()
         {
-
+            _provider = new GenerateEncryptionProvider("oooooooooooooooooooooooo");
         }
         public DbSet<GardenModel> Gardens { get; set; }
         public DbSet<InstructionModel> Instructions { get; set; }
@@ -24,7 +29,10 @@ namespace GreenThumb.Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
+            modelBuilder.UseEncryption(_provider);
+
 
             modelBuilder.Entity<PlantGardenModel>().HasKey(pg => new { pg.PlantId, pg.GardenId });
 
@@ -61,15 +69,15 @@ namespace GreenThumb.Database
                     Description = "Flowers are fragrant with the scent of a ripe orange and strongly resembles a monkey's face",
                     PlantedDate = DateTime.Now,
 
-                });
-            //new PlantModel()
-            //{
-            //    PlantId = 5,
-            //    Name = "Parrot flower",
-            //    Description = "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo",
-            //    PlantedDate = DateTime.Now,
+                },
+            new PlantModel()
+            {
+                PlantId = 5,
+                Name = "Parrot flower",
+                Description = "The plant rows compactly to a height of about half a metre, its flower resemble that of a flying cockatoo",
+                PlantedDate = DateTime.Now,
 
-            //});
+            });
             modelBuilder.Entity<InstructionModel>()
                 .HasData(new InstructionModel()
                 {
@@ -119,6 +127,14 @@ namespace GreenThumb.Database
                     instructionText = "needs a Light place in full shade",
                     PlantId = 4,
                 });
+
+            modelBuilder.Entity<UserModel>()
+               .HasData(new UserModel()
+               {
+                   UserId = 1,
+                   Username = "bob",
+                   password = "Ross"
+               });
 
         }
     }
